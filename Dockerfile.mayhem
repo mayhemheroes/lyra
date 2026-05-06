@@ -11,10 +11,10 @@ RUN apt update && apt install -y bazel-4.0.0
 
 COPY . /repo
 WORKDIR /repo
-RUN bazel-4.0.0 build -c opt :encoder_main
+RUN bazel-4.0.0 build -c opt //lyra/cli_example:encoder_main
 
 WORKDIR /repo
-RUN cp /repo/bazel-bin/encoder_main /repo
+RUN cp /repo/bazel-bin/lyra/cli_example/encoder_main /repo
 
 FROM ubuntu:22.04 as package
 COPY --from=builder /repo/encoder_main /
